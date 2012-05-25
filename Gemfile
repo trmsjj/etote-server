@@ -6,6 +6,7 @@ gem 'pg'
 gem 'thin'
 
 gem 'validates_email_format_of'
+gem 'active_model_serializers'
 
 gem 'jquery-rails'
 # Gems used only for assets and not required

@@ -1,13 +1,19 @@
 module Api::V1
   class RequestsController < ApiController
-    before_filter :parse_request
-    before_filter :parse_requestor
-    before_filter :parse_documents
-    before_filter :find_or_create_requestor
-    before_filter :find_or_create_doc_requests
+    before_filter :parse_request,
+                  :parse_requestor,
+                  :parse_documents,
+                  :find_or_create_requestor,
+                  :find_or_create_doc_requests,
+                  :only => :create
 
     def create
       head :created
+    end
+
+    def index
+      @requestors = Requestor.all
+      render :json => @requestors
     end
 
     private
