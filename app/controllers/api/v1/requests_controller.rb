@@ -4,6 +4,7 @@ module Api::V1
     before_filter :parse_requestor
     before_filter :parse_documents
     before_filter :find_or_create_requestor
+    before_filter :find_or_create_doc_requests
 
     def create
       head :created
@@ -43,14 +44,20 @@ module Api::V1
     end
 
     def find_or_create_requestor
-      if @requestor = Requestor.find_by_email(@email)
-        @requestor.name = @name
-      else
-        @requestor = Requestor.new(:name => @name, :email => @email)
-      end
+      @requestor = Requestor.where(:email => @email).first_or_initialize
+      @requestor.name = @name
 
       unless @requestor.save
         render :json => @requestor.errors, :status => :unprocessable_entity
+      end
+    end
+
+    def find_or_create_doc_requests
+      @documents.each do |doc|
+        DocumentRequest.where({
+          :file_name => doc.to_s,
+          :requestor_id => @requestor.id
+        }).first_or_create
       end
     end
 
