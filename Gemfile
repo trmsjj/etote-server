@@ -5,6 +5,8 @@ gem 'rails-api'
 gem 'pg'
 gem 'thin'
 
+gem 'validates_email_format_of'
+
 gem 'jquery-rails'
 # Gems used only for assets and not required
 # in production environments by default.
