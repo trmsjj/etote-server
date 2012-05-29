@@ -59,11 +59,15 @@ module Api::V1
     end
 
     def find_or_create_doc_requests
-      @documents.each do |doc|
-        DocumentRequest.where({
-          :file_name => doc.to_s,
-          :requestor_id => @requestor.id
-        }).first_or_create
+      @documents.each do |doc_id|
+
+        if doc = Document.find_by_id(doc_id)
+          DocumentRequest.where({
+            :document_id => doc.id,
+            :requestor_id => @requestor.id
+          }).first_or_create
+        end
+
       end
     end
 

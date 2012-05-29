@@ -3,6 +3,12 @@ module Api::V1
     def index
       render :json => {
         :resources => {
+          :categories => {
+            :href => api_v1_categories_url(),
+            :options => ['GET'],
+            :content_type => 'application/json',
+            :accepts => 'application/json'
+          },
           :requests => {
             :href => api_v1_requests_url(),
             :options => ['POST'],
