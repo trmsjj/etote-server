@@ -3,6 +3,7 @@ Etote::Application.routes.draw do
     root :to => 'api_root#index'
     namespace :v1 do
       root :to => 'root#index'
+      resources :categories, :only => :index
       resources :requests, :only => :create
       match 'report' => 'requests#index', :via => :get
     end
