@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120529155842) do
+ActiveRecord::Schema.define(:version => 20120605013321) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -20,14 +20,14 @@ ActiveRecord::Schema.define(:version => 20120529155842) do
   end
 
   create_table "document_requests", :force => true do |t|
-    t.integer  "requestor_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "document_id"
+    t.integer  "tote_id"
+    t.integer  "requestor_id"
   end
 
   add_index "document_requests", ["document_id"], :name => "index_document_requests_on_document_id"
-  add_index "document_requests", ["requestor_id"], :name => "index_document_requests_on_requestor_id"
 
   create_table "documents", :force => true do |t|
     t.string   "name"
@@ -47,5 +47,14 @@ ActiveRecord::Schema.define(:version => 20120529155842) do
   end
 
   add_index "requestors", ["email"], :name => "index_requestors_on_email", :unique => true
+
+  create_table "totes", :force => true do |t|
+    t.string   "owner"
+    t.string   "owner_comments"
+    t.string   "customer_comments"
+    t.integer  "requestor_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
 end
