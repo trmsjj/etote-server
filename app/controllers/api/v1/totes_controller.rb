@@ -1,10 +1,10 @@
 module Api::V1
-  class RequestsController < ApiController
+  class TotesController < ApiController
     before_filter :parse_request,
                   :parse_requestor,
                   :parse_documents,
                   :find_or_create_requestor,
-                  :find_or_create_doc_requests,
+                  :create_tote,
                   :only => :create
 
     def create
@@ -12,30 +12,40 @@ module Api::V1
     end
 
     def index
-      @requestors = Requestor.all
-      render :json => @requestors
+      @totes = Tote.all
+      render :json => @totes
     end
 
     private
     def parse_request
-      render_error("Missing 'request' object.") unless @request = params[:request]
+      render_error("Missing 'tote' object.") unless @tote = params[:tote]
     end
 
     def parse_requestor
       errors = []
-      unless @name = @request[:name]
+      unless @name = @tote[:name]
         errors << "Missing 'name' property in 'request' object."
       end
-      unless @email = @request[:email]
+      unless @email = @tote[:email]
         errors << "Missing 'email' property in 'request' object."
       end
+      unless @owner = @tote[:owner]
+        errors << "Missing 'owner' property in 'request' object."
+      end
+      unless @owner_comments = @tote[:owner_comments]
+        errors << "Missing 'owner_comments' property in 'request' object."
+      end
+      unless @customer_comments = @tote[:customer_comments]
+        errors << "Missing 'customer_comments' property in 'request' object."
+      end
+
 
       render_error(errors) unless errors.empty?
     end
 
     def parse_documents
       errors = []
-      unless @documents = @request[:documents]
+      unless @documents = @tote[:documents]
         errors << "Missing 'documents' array in 'request' object."
       end
       if @documents && !@documents.kind_of?(Array)
@@ -58,17 +68,18 @@ module Api::V1
       end
     end
 
-    def find_or_create_doc_requests
+    def create_tote
+      tote = Tote.new(
+        :owner => @owner,
+        :owner_comments => @owner_comments,
+        :customer_comments => @customer_comments)
       @documents.each do |doc_id|
-
         if doc = Document.find_by_id(doc_id)
-          DocumentRequest.where({
-            :document_id => doc.id,
-            :requestor_id => @requestor.id
-          }).first_or_create
+          tote.documents << doc
         end
-
       end
+      @requestor.totes << tote
+      tote.save
     end
 
   end

@@ -4,8 +4,8 @@ Etote::Application.routes.draw do
     namespace :v1 do
       root :to => 'root#index'
       resources :categories, :only => :index
-      resources :requests, :only => :create
-      match 'report' => 'requests#index', :via => :get
+      resources :totes, :only => :create
+      match 'report' => 'totes#index', :via => :get
     end
   end
 end
