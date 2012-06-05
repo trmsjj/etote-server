@@ -1,5 +1,5 @@
 class DocumentRequest < ActiveRecord::Base
-  belongs_to :requestor
+  belongs_to :tote
   belongs_to :document
-  validates :document, :requestor, :presence => true
+  validates :document, :tote, :presence => true
 end
