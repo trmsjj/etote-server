@@ -8,6 +8,5 @@ class CreateTotes < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :totes, :tote_id
   end
 end
