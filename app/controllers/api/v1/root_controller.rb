@@ -9,7 +9,7 @@ module Api::V1
             :content_type => 'application/json',
             :accepts => 'application/json'
           },
-          :requests => {
+          :totes => {
             :href => api_v1_totes_url(),
             :options => ['POST'],
             :content_type => 'application/json',
