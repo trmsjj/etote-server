@@ -24,19 +24,19 @@ module Api::V1
     def parse_requestor
       errors = []
       unless @name = @tote[:name]
-        errors << "Missing 'name' property in 'request' object."
+        errors << "Missing 'name' property in 'tote' object."
       end
       unless @email = @tote[:email]
-        errors << "Missing 'email' property in 'request' object."
+        errors << "Missing 'email' property in 'tote' object."
       end
       unless @owner = @tote[:owner]
-        errors << "Missing 'owner' property in 'request' object."
+        errors << "Missing 'owner' property in 'tote' object."
       end
       unless @owner_comments = @tote[:owner_comments]
-        errors << "Missing 'owner_comments' property in 'request' object."
+        errors << "Missing 'owner_comments' property in 'tote' object."
       end
       unless @customer_comments = @tote[:customer_comments]
-        errors << "Missing 'customer_comments' property in 'request' object."
+        errors << "Missing 'customer_comments' property in 'tote' object."
       end
 
 
@@ -46,7 +46,7 @@ module Api::V1
     def parse_documents
       errors = []
       unless @documents = @tote[:documents]
-        errors << "Missing 'documents' array in 'request' object."
+        errors << "Missing 'documents' array in 'tote' object."
       end
       if @documents && !@documents.kind_of?(Array)
         errors << "The 'documents' property is not an array."

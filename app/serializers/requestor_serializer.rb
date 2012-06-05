@@ -1,4 +1,3 @@
 class RequestorSerializer < ActiveModel::Serializer
-  attributes :name, :email
-  has_many :documents
+  attributes :id, :name, :email
 end
