@@ -1,4 +1,5 @@
 <h1>Category Details</h1>
+<p id="notice"><%= notice %></p>
 
 <p>
   <b>Name:</b>
@@ -13,8 +14,11 @@
 <h2>Documents</h2>
 <ul>
   <% @category.documents.each do |doc| %>
-    <li><%= doc.name %></li>
+    <li>
+      <%= link_to doc.name, document_path(doc) %>
+    </li>
   <% end %>
+  <li><%= link_to "Add New Document...", new_category_document_path(@category) %></li>
 </ul>
 
 <%= link_to 'Edit', edit_category_path(@category) %> |

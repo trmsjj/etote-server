@@ -1,0 +1,22 @@
+<h1>Document Details</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @document.name %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @document.url %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @document.category.name %>
+</p>
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Delete', @document, confirm: 'Are you sure?', method: :delete %> |
+<%= link_to 'Back', category_path(@document.category) %>
