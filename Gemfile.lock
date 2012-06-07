@@ -74,10 +74,6 @@ GEM
       activesupport (= 3.2.3)
       bundler (~> 1.0)
       railties (= 3.2.3)
-    rails-api (0.0.1)
-      actionpack (>= 3.2.0)
-      railties (>= 3.2.0)
-      tzinfo (~> 0.3.31)
     railties (3.2.3)
       actionpack (= 3.2.3)
       activesupport (= 3.2.3)
@@ -121,7 +117,6 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 3.2.3)
-  rails-api
   sass-rails (~> 3.2.3)
   thin
   uglifier (>= 1.0.3)
