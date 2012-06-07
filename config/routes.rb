@@ -1,4 +1,7 @@
 Etote::Application.routes.draw do
+
+  resources :categories
+
   namespace :api do
     root :to => 'api_root#index'
     namespace :v1 do
